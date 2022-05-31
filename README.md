@@ -1,4 +1,6 @@
-My reasons for this fork are aimed at software supply chain security. Here are the drivers:
+**kubewatch** is a Kubernetes watcher that publishes notification to available collaboration hubs/notification channels. Run it in your k8s cluster, and you will get event notifications through webhooks.
+
+The reasons for this fork are aimed at software supply chain security. Here are the main drivers:
  - to dispense with non-essential images (bitnami's image is not used) and stick to vanilla Ubuntu 20.04
  - to get rid of tarballs I don't trust (my Dockerfile only contains debian packages and the kubewatch compiled from source code)
  - to deploy kubewatch as a daemonset, i.e. to have one pod run on each of my Kubernetes cluster nodes
@@ -8,10 +10,7 @@ My reasons for this fork are aimed at software supply chain security. Here are t
   <img src="./docs/kubewatch-logo.jpeg">
 </p>
 
-
-[![Build Status](https://travis-ci.org/bitnami-labs/kubewatch.svg?branch=master)](https://travis-ci.org/bitnami-labs/kubewatch) [![Go Report Card](https://goreportcard.com/badge/github.com/bitnami-labs/kubewatch)](https://goreportcard.com/report/github.com/bitnami-labs/kubewatch) [![GoDoc](https://godoc.org/github.com/bitnami-labs/kubewatch?status.svg)](https://godoc.org/github.com/bitnami-labs/kubewatch) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bitnami-labs/kubewatch/blob/master/LICENSE)
-
-**kubewatch** is a Kubernetes watcher that currently publishes notification to available collaboration hubs/notification channels. Run it in your k8s cluster, and you will get event notifications through webhooks.
+(https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bitnami-labs/kubewatch/blob/master/LICENSE)
 
 # Build
 
@@ -41,6 +40,8 @@ docker push myregistry.azurecr.io/kubewatch:latest
 ```
 
 ## Run kubewatch in cluster
+
+First things first, ensure your cluster has permissions to pull images from your private registry.
 
 ### Customize deployment files
 
