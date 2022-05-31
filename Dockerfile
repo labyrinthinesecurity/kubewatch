@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/kubewatch
 
 COPY rootfs /
-COPY kubewatch /opt/kubewatch
+COPY kubewatch /opt/kubewatch/
 RUN chown -R 1001:root /opt/kubewatch/ && chmod g+rwX /opt/kubewatch/
 ENV APP_VERSION="0.1.0" \
     BITNAMI_APP_NAME="kubewatch" \
