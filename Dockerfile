@@ -15,8 +15,6 @@ COPY rootfs /
 COPY kubewatch /opt/kubewatch/
 RUN chown -R 1001:root /opt/kubewatch/ && chmod g+rwX /opt/kubewatch/
 ENV APP_VERSION="0.1.0" \
-    BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.1.0-debian-10-r571" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
