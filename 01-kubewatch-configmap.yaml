@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubewatch1
+  namespace: monitoring
+data:
+  .kubewatch.yaml: |
+    handler:
+      webhook:
+        url: "https://myazurefunction.azurewebsites.net/api/myEndpoint"
+    resource:
+      deployment: false
+      replicationcontroller: false
+      replicaset: false
+      daemonset: false
+      services: false
+      pod: true
+      node: false
+      job: false
+      persistentvolume: false
+      namespace: false
+      secret: false
+      ingress: false
