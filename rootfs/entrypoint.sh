@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CONF_FILE="${KW_CONFIG:-${HOME}}/.kubewatch.yaml";
 
