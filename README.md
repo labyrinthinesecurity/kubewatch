@@ -14,7 +14,7 @@ The reasons for this fork are aimed at software supply chain security. Here are 
 
 # Build
 
-## Go compiler and environment variables
+## Install Go compiler and set Go environment variables
 
 ```
 sudo snap install go
@@ -22,7 +22,7 @@ export GOPATH=/usr/local/go/bin
 export PATH="$PATH:/usr/local/go/bin"
 ```
 
-## Compile kubewatch from sources
+## Compile kubewatch from source
 ```
 git clone https://github.com/labyrinthinesecurity/kubewatch.git
 cd kubewatch
@@ -39,7 +39,7 @@ docker tag kubewatch:latest myregistry.azurecr.io/kubewatch:latest
 docker push myregistry.azurecr.io/kubewatch:latest
 ```
 
-## Run kubewatch in cluster
+## Run kubewatch in a cluster
 
 First things first, ensure your cluster has permissions to pull images from your private registry.
 
