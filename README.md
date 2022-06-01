@@ -1,8 +1,8 @@
 **kubewatch** is a Kubernetes watcher that publishes notification to available collaboration hubs/notification channels. Run it in your k8s cluster, and you will get event notifications through webhooks.
 
 The reasons for this fork are aimed at software supply chain security. Here are the main drivers:
- - to dispense with non-essential images (bitnami's image is not used) and stick to vanilla Ubuntu 20.04
- - to get rid of tarballs I don't trust (my Dockerfile only contains debian packages and the kubewatch compiled from source code)
+ - to dispense with non-essential images (bitnami's image is not used) and stick to vanilla Alpine Linux
+ - to get rid of tarballs I don't trust (my images only contains Alpine packages, Go packages and the kubewatch compiled from source code)
  - to deploy kubewatch as a daemonset, i.e. to have one pod run on each of my Kubernetes cluster nodes
  - to pull the image from a private repository, not from docker hub
 
@@ -14,27 +14,24 @@ The reasons for this fork are aimed at software supply chain security. Here are 
 
 # Build
 
-## Go compiler and environment variables
+## Build the builder...
 
 ```
-sudo snap install go
-export GOPATH=/usr/local/go/bin
-export PATH="$PATH:/usr/local/go/bin"
+git clone https://github.com/labyrinthinesecurity/kubewatch.git
+cd kubewatch
+docker build -f Dockerfile.builder -t alpinego:latest .
 ```
 
 ## Compile kubewatch from sources
 ```
-git clone https://github.com/labyrinthinesecurity/kubewatch.git
-cd kubewatch
-go build
+docker build -t kubewatch:latest .
 ```
 
-## Build and push image 
+## Push the kubewatch image 
 
 Note: replace **myregistry.azurecr.io** with the name of your private registry
 
 ```
-docker build -t kubewatch:latest .
 docker tag kubewatch:latest myregistry.azurecr.io/kubewatch:latest
 docker push myregistry.azurecr.io/kubewatch:latest
 ```
