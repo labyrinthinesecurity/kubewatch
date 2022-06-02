@@ -14,6 +14,7 @@ The reasons for this fork are aimed at software supply chain security. Here are 
 
 # Build
 
+
 ## Build the builder...
 
 ```
@@ -22,7 +23,7 @@ cd kubewatch
 docker build -f Dockerfile.builder -t alpinego:latest .
 ```
 
-## Compile kubewatch from sources
+## Compile kubewatch from source
 ```
 docker build -t kubewatch:latest .
 ```
@@ -36,7 +37,7 @@ docker tag kubewatch:latest myregistry.azurecr.io/kubewatch:latest
 docker push myregistry.azurecr.io/kubewatch:latest
 ```
 
-## Run kubewatch in cluster
+## Run kubewatch in a cluster
 
 First things first, ensure your cluster has permissions to pull images from your private registry.
 
