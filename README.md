@@ -10,12 +10,16 @@ The reasons for this fork are aimed at software supply chain security. Here are 
   <img src="./docs/kubewatch-logo.jpeg">
 </p>
 
-(https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bitnami-labs/kubewatch/blob/master/LICENSE)
+<p align="center">
+  <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg">
+</p>
 
 # Build
 
 
 ## Build the builder...
+
+This will build **alpinego:latest**, an image that contains all necessary dev elements to compile the kubewatch agent.
 
 ```
 git clone https://github.com/labyrinthinesecurity/kubewatch.git
@@ -24,11 +28,14 @@ docker build -f Dockerfile.builder -t alpinego:latest .
 ```
 
 ## Compile kubewatch from source
+
+Based on **alpinego:latest**, the following command will compile the kubewatch agent and place it into **kubewatch:latest**
+
 ```
 docker build -t kubewatch:latest .
 ```
 
-## Push the kubewatch image 
+## Push kubewatch:latest to your registry
 
 Note: replace **myregistry.azurecr.io** with the name of your private registry
 
@@ -37,11 +44,15 @@ docker tag kubewatch:latest myregistry.azurecr.io/kubewatch:latest
 docker push myregistry.azurecr.io/kubewatch:latest
 ```
 
-## Run kubewatch in a cluster
+# Run
+
+## Prepare cluster
 
 First things first, ensure your cluster has permissions to pull images from your private registry.
 
-### Customize deployment files
+## Customize deployment files
+
+### ConfigMap
 
 Edit **01-kubewatch-configmap.yaml** and toggle the resources you want to monitor. You will see that, by default, only pod events are being tracked:
 
@@ -68,6 +79,8 @@ Set the URL of the webhook to send events to (if necessary):
         url: "https://myazurefunction.azurewebsites.net/api/myEndpoint"
 ```
 
+### DeamonSet
+
 Edit **02-kubewatch-daemonset.yaml** to set the name of your private registry and change the **imagePullPolicy** to your liking:
 
 ```
@@ -76,7 +89,7 @@ Edit **02-kubewatch-daemonset.yaml** to set the name of your private registry an
         imagePullPolicy: Always
 ```
 
-### apply configuration
+## Apply configuration
 create clusterwide readOnly service account and 'monitoring' namespace:
 ```
 kubectl apply -f 00-kubewatch-service-account.yaml
